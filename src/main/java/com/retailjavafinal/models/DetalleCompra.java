@@ -1,6 +1,7 @@
 package com.retailjavafinal.models;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "detalle_compra")
@@ -10,6 +11,8 @@ public class DetalleCompra {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private long cantidad, precio, total;
+
+    private Date fecha_trx;
 
     @ManyToOne
     private Producto producto;
@@ -23,10 +26,11 @@ public class DetalleCompra {
     public DetalleCompra() {
     }
 
-    public DetalleCompra(long cantidad, long precio, long total, Producto producto, Compra compra) {
+    public DetalleCompra(long cantidad, long precio, long total, Date fecha, Producto producto, Compra compra) {
         this.cantidad = cantidad;
         this.precio = precio;
         this.total = total;
+        this.fecha_trx = fecha;
         this.producto = producto;
         this.compra = compra;
     }
@@ -61,6 +65,14 @@ public class DetalleCompra {
 
     public void setTotal(long total) {
         this.total = total;
+    }
+
+    public Date getFecha_trx() {
+        return fecha_trx;
+    }
+
+    public void setFecha_trx(Date fecha_trx) {
+        this.fecha_trx = fecha_trx;
     }
 
     public Producto getProducto() {

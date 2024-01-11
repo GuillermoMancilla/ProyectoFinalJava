@@ -1,5 +1,9 @@
 package com.retailjavafinal.util;
 
+import com.retailjavafinal.models.Compra;
+import com.retailjavafinal.models.DetalleCompra;
+import com.retailjavafinal.models.Producto;
+import com.retailjavafinal.models.Usuario;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -31,7 +35,10 @@ public class HibernateUtil {
 
                 configuration.setProperties(settings);
                 //Asociar las clases
-                //configuration.addAnnotatedClass(Clase.class);// Añade esta línea
+                configuration.addAnnotatedClass(Compra.class);// Añade esta línea
+                configuration.addAnnotatedClass(DetalleCompra.class);// Añade esta línea
+                configuration.addAnnotatedClass(Producto.class);// Añade esta línea
+                configuration.addAnnotatedClass(Usuario.class);// Añade esta línea
                 //Servicio de parametros de conexion
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();
