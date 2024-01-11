@@ -1,9 +1,8 @@
 package com.retailjavafinal.models;
 
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.Entity;
-
 import javax.persistence.*;
+
+
 
 @Entity
 public class Producto {
@@ -15,19 +14,32 @@ public class Producto {
     @JoinColumn(name = "tienda_id")
     private DetalleCompra tienda;
 
-    private String nombre, descripcion;
+    private String nombre, descripcion, categoria;
     private long precio;
+
+    private int stock;
 
     // CONSTRUCTOR
 
     public Producto() {
     }
 
-    public Producto(DetalleCompra tienda, String nombre, long precio, String descripcion) {
+    public Producto(String nombre, long precio, String descripcion, int stock, String categoria) {
+
+        this.nombre = nombre;
+        this.precio = precio;
+        this.descripcion = descripcion;
+        this.stock = stock;
+        this.categoria = categoria;
+    }
+
+    public Producto(DetalleCompra tienda, String nombre, long precio, String descripcion, int stock, String categoria) {
         this.tienda = tienda;
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
+        this.stock = stock;
+        this.categoria = categoria;
     }
 
     // Getters y Setters
@@ -72,4 +84,19 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
 }

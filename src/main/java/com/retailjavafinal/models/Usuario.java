@@ -1,8 +1,5 @@
 package com.retailjavafinal.models;
 
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.Entity;
-
 import javax.persistence.*;
 
 @Entity
