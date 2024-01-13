@@ -48,7 +48,7 @@ public class UsuarioDao {
             session.saveOrUpdate(usuario);
             transaction.commit();
         } catch (Exception ex) {
-            if (transaction != null){
+            if (transaction != null) {
                 transaction.rollback();
             }
             ex.printStackTrace();
@@ -62,7 +62,7 @@ public class UsuarioDao {
             session.delete(usuario);
             transaction.commit();
         } catch (Exception ex) {
-            if (transaction != null){
+            if (transaction != null) {
                 transaction.rollback();
             }
             ex.printStackTrace();

@@ -1,5 +1,7 @@
 package com.retailjavafinal.models;
 
+import org.hibernate.boot.archive.scan.spi.Scanner;
+
 import javax.persistence.*;
 
 
@@ -99,4 +101,18 @@ public class Producto {
     public void setStock(int stock) {
         this.stock = stock;
     }
+
+    public static void listarCategoria(Scanner scanner, Producto productoDao) {
+
+        List<Producto> cateroria = productoDao.findAll();
+        for (Producto producto : cateroria) {
+            if (producto != null) {
+                System.out.println(producto.getCategoria());
+                System.out.println();
+
+            }
+        }
+        System.out.println("------------------------------");
+    }
+
 }
