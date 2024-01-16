@@ -17,7 +17,8 @@ public class GestionUsuario {
         String telefono;
         String username;
         String contrasenia;
-        String tipoUsuario;
+        String tipoUsuario = "";
+        int seleccion = 0;
 
         System.out.println("Se iniciara el proceso para crear un usuario");
 
@@ -42,8 +43,19 @@ public class GestionUsuario {
         System.out.println("ingrese contraseña:");
         contrasenia = scanner.nextLine();
 
-        System.out.println("ingrese tipo de usuario:");
-        tipoUsuario = scanner.nextLine();
+        System.out.println("Indique el tipo de usuario a crear:\n1.-admin\n2.-cliente");
+        seleccion = scanner.nextInt();
+
+        switch (seleccion) {
+            case 1:
+                tipoUsuario = "admin";
+                break;
+            case 2:
+                tipoUsuario = "cliente";
+                break;
+            default:
+                System.out.println("Opción no válida. Inténtelo de nuevo.");
+        }
 
         Usuario user = new Usuario(nombre,apellido,mail,direccion,telefono,tipoUsuario,username,contrasenia);
 
