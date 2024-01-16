@@ -48,7 +48,7 @@ public class GestionUsuario {
         Usuario user = new Usuario(nombre,apellido,mail,direccion,telefono,tipoUsuario,username,contrasenia);
 
         usuarioDao.insert(user);
-        System.out.println("¡Usuario creado exitosamente!");
+        System.out.println("\n¡Usuario creado exitosamente!\n");
     }
 
     public Usuario loginuser(){

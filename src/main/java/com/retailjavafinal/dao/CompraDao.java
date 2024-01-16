@@ -1,9 +1,11 @@
 package com.retailjavafinal.dao;
 
 import com.retailjavafinal.models.Compra;
+import com.retailjavafinal.models.Usuario;
 import com.retailjavafinal.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -21,6 +23,17 @@ public class CompraDao {
     public List<Compra> findAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("FROM Compra", Compra.class).list();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Compra> findAllofUserCpas(long idUser) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Compra> query = session.createQuery("FROM Compra WHERE usuario_id = :usuario_id", Compra.class);
+            query.setParameter("usuario_id", idUser);
+            return query.list();
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;

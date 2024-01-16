@@ -61,6 +61,16 @@ public class ProductoDao {
         }
     }
 
+    public List<String> getCategorias() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<String> query = session.createQuery("SELECT distinct categoria FROM Producto");
+            return query.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+
     public void insert(Producto producto) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
