@@ -68,8 +68,8 @@ public class Compra {
         this.listaDetalleCompra = listaDetalleCompra;
     }
 
-    public void agregarCompra(DetalleCompra detalleCompra) {
+    /*public void agregarCompra(DetalleCompra detalleCompra) {
         listaDetalleCompra.add(detalleCompra);
         detalleCompra.setCompra(this);
-    }
+    }*/
 }

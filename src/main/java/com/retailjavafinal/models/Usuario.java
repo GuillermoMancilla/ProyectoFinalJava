@@ -10,8 +10,8 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy="compra_id", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Compra> compra = new ArrayList<>();
+    /*@OneToMany(mappedBy="compra_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Compra> compra = new ArrayList<>();*/
 
 
     private String nombre, apellido, correoElectronico, direccion, telefono, tipo_usuario, userName, contrasenia;
@@ -31,7 +31,7 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
-    public Usuario(List<Compra> compra, String nombre, String apellido, String correoElectronico, String direccion, String telefono, String tipo_usuario, String userName, String contrasenia) {
+    /*public Usuario(List<Compra> compra, String nombre, String apellido, String correoElectronico, String direccion, String telefono, String tipo_usuario, String userName, String contrasenia) {
         this.compra = compra;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -41,7 +41,7 @@ public class Usuario {
         this.tipo_usuario = tipo_usuario;
         this.userName = userName;
         this.contrasenia = contrasenia;
-    }
+    }*/
 
     public Long getId() {
         return id;
@@ -115,17 +115,17 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
-    public List<Compra> getCompra() {
+    /*public List<Compra> getCompra() {
         return compra;
     }
 
     public void setCompra(List<Compra> compra) {
         this.compra = compra;
-    }
+    }*/
 
-    public void agregarCompra(Compra compraUsusario) {
+    /*public void agregarCompra(Compra compraUsusario) {
         compra.add(compraUsusario);
         compraUsusario.setUsuario(this);
-    }
+    }*/
 }
 

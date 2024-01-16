@@ -23,6 +23,10 @@ public class CompraController {
     public void consultaTodasLasComprasDeusuario(Usuario usuario){
         CompraDao compraDao = new CompraDao();
         List<Compra> compras = compraDao.findAllofUserCpas(usuario.getId());
+
+        for (Compra cpacle: compras){
+            System.out.println("\ncompra numero: " + cpacle.getid() + "\npor un total de: " + cpacle.getTotal()+"\n");
+        }
     }
 
 

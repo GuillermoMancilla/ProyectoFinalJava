@@ -13,12 +13,12 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToOne
-//    @JoinColumn(name = "tienda_id")
-//    private DetalleCompra tienda;
+    @ManyToOne
+    @JoinColumn(name = "tienda_id")
+    private DetalleCompra tienda;
 
-    @OneToMany(mappedBy="tienda_id", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DetalleCompra> tienda = new ArrayList<>();
+//    @OneToMany(mappedBy="tienda_id", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<DetalleCompra> tienda = new ArrayList<>();
 
     private String nombre, descripcion, categoria;
     private long precio;
@@ -40,7 +40,7 @@ public class Producto {
     }
 
     public Producto(DetalleCompra tienda, String nombre, long precio, String descripcion, int stock, String categoria) {
-        this.tienda = (List<DetalleCompra>) tienda;
+        this.tienda = tienda;
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
@@ -63,7 +63,7 @@ public class Producto {
     }
 
     public void setTienda(DetalleCompra tienda) {
-        this.tienda = (List<DetalleCompra>) tienda;
+        this.tienda =  tienda;
     }
 
     public String getNombre() {
@@ -106,9 +106,9 @@ public class Producto {
         this.stock = stock;
     }
 
-    public void agregarCompra(DetalleCompra detalleCompra) {
+    /*public void agregarCompra(DetalleCompra detalleCompra) {
         tienda.add(detalleCompra);
         detalleCompra.setProducto(this);
-    }
+    }*/
 
 }
