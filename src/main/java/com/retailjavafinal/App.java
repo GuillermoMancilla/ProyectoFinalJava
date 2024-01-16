@@ -112,6 +112,7 @@ public class App {
                 case 2:
                     //verHistorialCompras(usuario);
                     compraController.consultaTodasLasCompras();
+
                     break;
                 case 3:
                     //solicitarResumenCarrito(carrito);
