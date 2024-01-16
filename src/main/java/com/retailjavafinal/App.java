@@ -36,7 +36,7 @@ public class App {
             switch (opcion) {
                 case 1:
                     userActivo = GU.loginuser();
-                    System.out.println("Usuario " + userActivo.getUserName() + " inicio sesion.");
+                    System.out.println("\nUsuario " + userActivo.getUserName() + " inicio sesion.\n");
                     if (userActivo.getTipo_usuario().contains("admin")){
                         menuAdmin();
                     }else{
@@ -111,7 +111,7 @@ public class App {
                     break;
                 case 2:
                     //verHistorialCompras(usuario);
-                    compraController.consultaTodasLasCompras();
+                    compraController.consultaTodasLasComprasDeusuario(usuario);
 
                     break;
                 case 3:

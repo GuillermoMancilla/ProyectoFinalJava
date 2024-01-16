@@ -55,17 +55,26 @@ public class GestionProductos {
 
     public void busquedaPorCategoria(){
         Scanner scanner = new Scanner(System.in);
+        ProductoDao productoDao = new ProductoDao();
+        //buscamos las categorias existentes:
+        List<String> catprod = productoDao.getCategorias();
+
+        for (String categorias: catprod
+             ) {
+            System.out.println(categorias + "\n");
+        }
+
 
         System.out.println("ingrese una categoria de producto a buscar:");
         String categoriabusqueda = scanner.next();
 
-        ProductoDao productoDao = new ProductoDao();
+
         List<Producto> porductoporCategoria = productoDao.findbyCategoria(categoriabusqueda);
 
         for (Producto productocategoria: porductoporCategoria)
         {
             System.out.println("El producto encontrado es: " + productocategoria.getNombre()
-                    + " con descripcion: " + productocategoria.getDescripcion());
+                    + " con descripcion: " + productocategoria.getDescripcion() + "\n");
         }
     }
 }

@@ -2,6 +2,7 @@ package com.retailjavafinal.controllers;
 
 import com.retailjavafinal.dao.CompraDao;
 import com.retailjavafinal.models.Compra;
+import com.retailjavafinal.models.Usuario;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -19,9 +20,9 @@ public class CompraController {
         compraDao.insert(compra);
     }
 
-    public void consultaTodasLasCompras(){
+    public void consultaTodasLasComprasDeusuario(Usuario usuario){
         CompraDao compraDao = new CompraDao();
-        List<Compra> compras = compraDao.findAll();
+        List<Compra> compras = compraDao.findAllofUserCpas(usuario.getId());
     }
 
 

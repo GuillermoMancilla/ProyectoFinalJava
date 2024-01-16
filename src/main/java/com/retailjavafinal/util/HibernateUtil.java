@@ -28,7 +28,7 @@ public class HibernateUtil {
                 settings.put(Environment.USER, "root");
                 settings.put(Environment.PASS, "memo1992");
 
-                settings.put(Environment.SHOW_SQL, "true");
+                settings.put(Environment.SHOW_SQL, "false");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
                 //Manejar la construccion de tablas de la base de datos
                 settings.put(Environment.HBM2DDL_AUTO, "update");
