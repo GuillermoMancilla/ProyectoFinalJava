@@ -67,4 +67,9 @@ public class Compra {
     public void setListaDetalleCompra(List<DetalleCompra> listaDetalleCompra) {
         this.listaDetalleCompra = listaDetalleCompra;
     }
+
+    public void agregarCompra(DetalleCompra detalleCompra) {
+        listaDetalleCompra.add(detalleCompra);
+        detalleCompra.setCompra(this);
+    }
 }

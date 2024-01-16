@@ -122,5 +122,10 @@ public class Usuario {
     public void setCompra(List<Compra> compra) {
         this.compra = compra;
     }
+
+    public void agregarCompra(Compra compraUsusario) {
+        compra.add(compraUsusario);
+        compraUsusario.setUsuario(this);
+    }
 }
 
