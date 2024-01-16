@@ -3,6 +3,7 @@ package com.retailjavafinal.models;
 import org.hibernate.boot.archive.scan.spi.Scanner;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -12,9 +13,12 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "tienda_id")
-    private DetalleCompra tienda;
+//    @ManyToOne
+//    @JoinColumn(name = "tienda_id")
+//    private DetalleCompra tienda;
+
+    @OneToMany(mappedBy="tienda_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DetalleCompra> tienda = new ArrayList<>();
 
     private String nombre, descripcion, categoria;
     private long precio;
@@ -36,7 +40,7 @@ public class Producto {
     }
 
     public Producto(DetalleCompra tienda, String nombre, long precio, String descripcion, int stock, String categoria) {
-        this.tienda = tienda;
+        this.tienda = (List<DetalleCompra>) tienda;
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
@@ -55,11 +59,11 @@ public class Producto {
     }
 
     public DetalleCompra getTienda() {
-        return tienda;
+        return (DetalleCompra) tienda;
     }
 
     public void setTienda(DetalleCompra tienda) {
-        this.tienda = tienda;
+        this.tienda = (List<DetalleCompra>) tienda;
     }
 
     public String getNombre() {
@@ -102,17 +106,9 @@ public class Producto {
         this.stock = stock;
     }
 
-    /*public static void listarCategoria(Scanner scanner, Producto productoDao) {
-
-        List<Producto> cateroria = productoDao.findAll();
-        for (Producto producto : cateroria) {
-            if (producto != null) {
-                System.out.println(producto.getCategoria());
-                System.out.println();
-
-            }
-        }
-        System.out.println("------------------------------");
-    }*/
+    public void agregarCompra(DetalleCompra detalleCompra) {
+        tienda.add(detalleCompra);
+        detalleCompra.setProducto(this);
+    }
 
 }
