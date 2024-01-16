@@ -19,6 +19,15 @@ public class Compra {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compra")
     private List<DetalleCompra> listaDetalleCompra;
 
+    public Compra() {
+
+    }
+
+    public Compra(Date fecha, long total) {
+        this.fecha = fecha;
+        this.total = total;
+    }
+
     public Long getid() {
         return id;
     }

@@ -8,18 +8,21 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nombre, apellido, correoElectronico, direccion, telefono, tipo_usuario;
+    private String nombre, apellido, correoElectronico, direccion, telefono, tipo_usuario, userName, contrasenia;
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, String correoElectronico, String direccion, String telefono, String tipo_usuario) {
+    public Usuario(String nombre, String apellido, String correoElectronico, String direccion, String telefono, String tipo_usuario
+    , String nombreusuario, String contrasenia) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.correoElectronico = correoElectronico;
         this.direccion = direccion;
         this.telefono = telefono;
         this.tipo_usuario = tipo_usuario;
+        this.userName = nombreusuario;
+        this.contrasenia = contrasenia;
     }
 
     public Long getId() {
@@ -76,6 +79,22 @@ public class Usuario {
 
     public void setTipo_usuario(String tipo_usuario) {
         this.tipo_usuario = tipo_usuario;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 }
 

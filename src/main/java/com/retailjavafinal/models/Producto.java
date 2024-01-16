@@ -3,7 +3,7 @@ package com.retailjavafinal.models;
 import org.hibernate.boot.archive.scan.spi.Scanner;
 
 import javax.persistence.*;
-
+import java.util.List;
 
 
 @Entity
@@ -70,7 +70,7 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public double getPrecio() {
+    public long getPrecio() {
         return precio;
     }
 
@@ -102,7 +102,7 @@ public class Producto {
         this.stock = stock;
     }
 
-    public static void listarCategoria(Scanner scanner, Producto productoDao) {
+    /*public static void listarCategoria(Scanner scanner, Producto productoDao) {
 
         List<Producto> cateroria = productoDao.findAll();
         for (Producto producto : cateroria) {
@@ -113,6 +113,6 @@ public class Producto {
             }
         }
         System.out.println("------------------------------");
-    }
+    }*/
 
 }

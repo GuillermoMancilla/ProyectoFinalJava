@@ -20,7 +20,7 @@ public class DetalleDao {
 
     public static List<DetalleCompra> findAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("FROM DetalleCompra").list();
+            return session.createQuery("FROM DetalleCompra", DetalleCompra.class).list();
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;

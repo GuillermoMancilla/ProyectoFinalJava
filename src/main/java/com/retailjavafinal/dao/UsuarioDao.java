@@ -4,6 +4,7 @@ import com.retailjavafinal.models.Usuario;
 import com.retailjavafinal.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -21,6 +22,29 @@ public class UsuarioDao {
     public static List<Usuario> findAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("FROM Usuario").list();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public Usuario findByUsername(String username) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Usuario> query = session.createQuery("FROM Usuario WHERE userName = :username", Usuario.class);
+            query.setParameter("username", username);
+            Usuario userEncontrado = new Usuario();
+            for (Usuario userList:query.list()) {
+                userEncontrado.setId(userList.getId());
+                userEncontrado.setNombre(userList.getNombre());
+                userEncontrado.setUserName(userList.getUserName());
+                userEncontrado.setContrasenia(userList.getContrasenia());
+                userEncontrado.setApellido(userList.getApellido());
+                userEncontrado.setDireccion(userList.getDireccion());
+                userEncontrado.setCorreoElectronico(userList.getCorreoElectronico());
+                userEncontrado.setTelefono(userList.getTelefono());
+                userEncontrado.setTipo_usuario(userList.getTipo_usuario());
+            }
+            return userEncontrado;
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;

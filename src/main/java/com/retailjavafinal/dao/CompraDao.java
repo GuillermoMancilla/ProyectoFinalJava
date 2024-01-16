@@ -18,9 +18,9 @@ public class CompraDao {
         }
     }
 
-    public static List<Compra> findAll() {
+    public List<Compra> findAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("FROM Compra").list();
+            return session.createQuery("FROM Compra", Compra.class).list();
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
