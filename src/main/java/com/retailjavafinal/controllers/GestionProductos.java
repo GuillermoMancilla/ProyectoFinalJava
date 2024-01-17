@@ -7,6 +7,7 @@ import com.retailjavafinal.models.*;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -89,14 +90,14 @@ public class GestionProductos {
         Scanner scanner = new Scanner(System.in);
         CarritoDeCompra carritoDeCompra = new CarritoDeCompra();
         while (true) {
-            System.out.println("---- Menú de compras ----");
+            System.out.println("\n---- Menú de compras ----\n");
             System.out.println("1. mostrar catalogo");
             System.out.println("2. Agregar producto al carrito de compras");
             System.out.println("3. Solicitar resumen del carrito de compras");
             System.out.println("4. realizar compra");
             System.out.println("5. Volver al menú principal");
 
-            System.out.print("Seleccione una opción: ");
+            System.out.print("\nSeleccione una opción: \n");
             int opcion = scanner.nextInt();
 
             switch (opcion) {
@@ -104,8 +105,40 @@ public class GestionProductos {
                     mostrarCatalogo();
                     break;
                 case 2:
+                    long seleccionuser;
+                    long cantidadSol;
+
+                    //generamos la fecha
+                    LocalDate localDate = LocalDate.now();
+                    Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
                     //Aqui solicitaremos que cliente ingrese el codigo de producto visualizado en el catalogo
                     System.out.println("por favor ingrese el codigo del producto a agregar:");
+
+                    seleccionuser = scanner.nextLong();
+                    System.out.println("por favor ingrese la cantidad de productos a agregar");
+
+                    cantidadSol = scanner.nextLong();
+                    ProductoDao productoDao = new ProductoDao();
+                    Producto itempedido = productoDao.findById(seleccionuser);
+
+                    List<PedidoViewmodel> pedidoAux = new ArrayList<>();
+
+                    PedidoViewmodel pedido = new PedidoViewmodel();
+                    pedido.idItem = itempedido.getId();
+                    pedido.cantidad = cantidadSol;
+                    pedido.precio = itempedido.getPrecio();
+                    pedido.total = (pedido.precio*cantidadSol);
+                    pedido.fechapedido = date;
+
+                    //carritoDeCompra.pedidosya.add(pedido);
+
+                    pedidoAux.add(pedido);
+                    carritoDeCompra.pedidosya = pedidoAux;
+
+                    carritoDeCompra.total = carritoDeCompra.total + pedido.total;
+
+
                     break;
                 case 3:
                     //aqui recorrer carrito de comrpas para mostrar a cliente su carrito
@@ -114,29 +147,29 @@ public class GestionProductos {
                     //aqui llamamos a los daos con la dara recopilada
                     CompraDao compraDao = new CompraDao();
                     //generamos la fecha
-                    LocalDate localDate = LocalDate.now();
-                    Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                    LocalDate localDate1 = LocalDate.now();
+                    Date date1 = Date.from(localDate1.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-                    Compra compra = new Compra(date, carritoDeCompra.total);
+                    Compra compra = new Compra(date1, carritoDeCompra.total);
                     UsuarioDao usuarioDao = new UsuarioDao();
                     usuarioDao.addCompraToUsuario(usuario.getId(),compra);
 
-                    for (DetalleCompra det: carritoDeCompra.compras
+                    for (PedidoViewmodel det: carritoDeCompra.pedidosya
                          ) {
-                        //compraDao.addDetalleCompra(compra1.getid(),det, .getId());
+                        DetalleCompra detalle = new DetalleCompra(det.cantidad, det.precio, det.total, det.fechapedido);
+
+                        compraDao.addDetalleCompra(compra.getid(),detalle, det.idItem);
                     }
 
+                    System.out.println("\nFelicidades, la compra se a realizado con exito, el numero de su orden es: "
+                    + compra.getid() + " por un total de: " + compra.getTotal() + "\n");
 
-                    //SECCION COMENTADA PERO GUARDADA TEMPORALMENTE
-                    /*//Buscamos la ultima compra realiszada
-                    CompraDao ultCpa = new CompraDao();
-                    Compra uCompra = ultCpa.getultimaCompra(usuario.getId());*/
                     break;
                 case 5:
-                    System.out.println("Volviendo al menú principal.");
+                    System.out.println("\nVolviendo al menú principal.\n");
                     return;
                 default:
-                    System.out.println("Opción no válida. Inténtelo de nuevo.");
+                    System.out.println("\nOpción no válida. Inténtelo de nuevo.\n");
             }
         }
 
@@ -145,7 +178,7 @@ public class GestionProductos {
     public static void mostrarCatalogo() {
         List<Producto> catalogo = obtenerCatalogo();
 
-        System.out.println("Catalogo de productos:");
+        System.out.println("\nCatalogo de productos:\n");
         for (int i = 0; i < catalogo.size(); i++) {
             Producto producto = catalogo.get(i);
             //Se modifica para mostrar el codigo de producto

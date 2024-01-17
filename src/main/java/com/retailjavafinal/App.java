@@ -62,7 +62,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         GestionProductos GP = new GestionProductos();
         while (true) {
-            System.out.println("---- Menú Administrador ----");
+            System.out.println("\n---- Menú Administrador ----");
             System.out.println("1. Crear producto");
             System.out.println("2. Eliminar producto");
             System.out.println("3. Buscar productos por categoria");
@@ -95,7 +95,7 @@ public class App {
         CompraController compraController = new CompraController();
 
         while (true) {
-            System.out.println("---- Menú Usuario Normal ----");
+            System.out.println("\n---- Menú Usuario Normal ----");
             System.out.println("1. Seccion de compras");
             System.out.println("2. Ver historial de compras");
             //System.out.println("3. Solicitar resumen del carrito de compras");

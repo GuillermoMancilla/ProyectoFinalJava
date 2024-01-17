@@ -5,7 +5,11 @@ import java.util.List;
 
 public class CarritoDeCompra {
     public List<DetalleCompra> compras;
-    public int total;
+    public long total;
 
     public Date fechaCpa;
+
+    public List<PedidoViewmodel> pedidosya;
+
+
 }
