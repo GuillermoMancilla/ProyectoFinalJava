@@ -22,25 +22,25 @@ public class GestionUsuario {
 
         System.out.println("Se iniciara el proceso para crear un usuario");
 
-        System.out.println("ingrese nombre:");
+        System.out.println("Ingrese nombre:");
         nombre = scanner.nextLine();
 
-        System.out.println("ingrese apellido:");
+        System.out.println("Ingrese apellido:");
         apellido = scanner.nextLine();
 
-        System.out.println("ingrese direccion:");
+        System.out.println("Ingrese direccion:");
         direccion = scanner.nextLine();
 
-        System.out.println("ingrese mail:");
+        System.out.println("Ingrese mail:");
         mail = scanner.nextLine();
 
-        System.out.println("ingrese telefono:");
+        System.out.println("Ingrese telefono:");
         telefono = scanner.nextLine();
 
-        System.out.println("ingrese Nombre de usuario:");
+        System.out.println("Ingrese Nombre de usuario:");
         username = scanner.nextLine();
 
-        System.out.println("ingrese contraseña:");
+        System.out.println("Ingrese contraseña:");
         contrasenia = scanner.nextLine();
 
         System.out.println("Indique el tipo de usuario a crear:\n1.-admin\n2.-cliente");

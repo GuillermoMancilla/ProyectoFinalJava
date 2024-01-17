@@ -44,7 +44,7 @@ public class GestionProductos {
         Scanner scanner = new Scanner(System.in);
         ProductoDao productoDao = new ProductoDao();
         String proname, respuesta;
-        System.out.println("ingrese el nombre del producto a eliminar");
+        System.out.println("Ingrese el nombre del producto a eliminar");
         proname = scanner.next();
         Producto producto = productoDao.findbyName(proname);
         System.out.println("Producto encontrado: " + producto.getNombre() + " de la categoria: " +
@@ -71,7 +71,7 @@ public class GestionProductos {
         }
 
 
-        System.out.println("ingrese una categoria de producto a buscar:");
+        System.out.println("Ingrese una categoria de producto a buscar:");
         String categoriabusqueda = scanner.next();
 
 
@@ -113,10 +113,10 @@ public class GestionProductos {
                     Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
                     //Aqui solicitaremos que cliente ingrese el codigo de producto visualizado en el catalogo
-                    System.out.println("por favor ingrese el codigo del producto a agregar:");
+                    System.out.println("Por favor, ingrese el código del producto a agregar:");
 
                     seleccionuser = scanner.nextLong();
-                    System.out.println("por favor ingrese la cantidad de productos a agregar");
+                    System.out.println("Por favor, ingrese la cantidad de productos a agregar");
 
                     cantidadSol = scanner.nextLong();
                     ProductoDao productoDao = new ProductoDao();
@@ -131,17 +131,27 @@ public class GestionProductos {
                     pedido.total = (pedido.precio*cantidadSol);
                     pedido.fechapedido = date;
 
-                    //carritoDeCompra.pedidosya.add(pedido);
-
                     pedidoAux.add(pedido);
                     carritoDeCompra.pedidosya = pedidoAux;
 
                     carritoDeCompra.total = carritoDeCompra.total + pedido.total;
 
+                    System.out.println("Se agrego con exito: " + itempedido.getNombre() + " por una cantidad de: " +
+                            cantidadSol + ". Por un total de: " + pedido.total);
+
 
                     break;
                 case 3:
                     //aqui recorrer carrito de comrpas para mostrar a cliente su carrito
+                    System.out.println("\nArticulos en su carrito: ");
+                    ProductoDao productoDao1 = new ProductoDao();
+                    for (PedidoViewmodel det: carritoDeCompra.pedidosya
+                    ) {
+                        Producto itemcarrito = productoDao1.findById(det.idItem);
+                        System.out.println("Cod. producto: " + det.idItem + ", producto: " + itemcarrito.getNombre() +
+                                ", cantidad: " + det.cantidad + ", por un total de: " + det.total);
+
+                    }
                     break;
                 case 4:
                     //aqui llamamos a los daos con la dara recopilada
