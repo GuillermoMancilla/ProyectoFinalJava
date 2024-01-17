@@ -14,9 +14,10 @@ public class Compra {
     private long total;
 
     @ManyToOne
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compra")
+    @OneToMany(mappedBy = "compra",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetalleCompra> listaDetalleCompra;
 
     public Compra() {
@@ -68,8 +69,8 @@ public class Compra {
         this.listaDetalleCompra = listaDetalleCompra;
     }
 
-    /*public void agregarCompra(DetalleCompra detalleCompra) {
+    public void agregarCompra(DetalleCompra detalleCompra) {
         listaDetalleCompra.add(detalleCompra);
         detalleCompra.setCompra(this);
-    }*/
+    }
 }

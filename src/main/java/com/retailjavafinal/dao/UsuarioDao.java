@@ -1,5 +1,6 @@
 package com.retailjavafinal.dao;
 
+import com.retailjavafinal.models.Compra;
 import com.retailjavafinal.models.Usuario;
 import com.retailjavafinal.util.HibernateUtil;
 import org.hibernate.Session;
@@ -48,6 +49,31 @@ public class UsuarioDao {
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
+        }
+    }
+
+    public void addCompraToUsuario(Long userId, Compra compra) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+
+            // Obtener el autor
+            Usuario usuario = session.get(Usuario.class, userId);
+
+            if (usuario != null){
+                // Asignar el libro al autor
+                usuario.agregarCompra(compra);
+
+                // Guardar la actualización
+                session.saveOrUpdate(usuario);
+            }
+
+            transaction.commit();
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
         }
     }
 

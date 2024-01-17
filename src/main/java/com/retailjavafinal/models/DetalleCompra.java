@@ -15,9 +15,11 @@ public class DetalleCompra {
     private Date fecha_trx;
 
     @ManyToOne
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 
     @ManyToOne
+    @JoinColumn(name = "compra_id")
     private Compra compra;
 
 //    CONSTRUCTOR
@@ -26,13 +28,20 @@ public class DetalleCompra {
     public DetalleCompra() {
     }
 
-    public DetalleCompra(long cantidad, long precio, long total, Date fecha, Producto producto, Compra compra) {
+    /*public DetalleCompra(long cantidad, long precio, long total, Date fecha, Producto producto, Compra compra) {
         this.cantidad = cantidad;
         this.precio = precio;
         this.total = total;
         this.fecha_trx = fecha;
         this.producto = producto;
         this.compra = compra;
+    }*/
+
+    public DetalleCompra(long cantidad, long precio, long total, Date fecha) {
+        this.cantidad = cantidad;
+        this.precio = precio;
+        this.total = total;
+        this.fecha_trx = fecha;
     }
 
     public long getid() {
