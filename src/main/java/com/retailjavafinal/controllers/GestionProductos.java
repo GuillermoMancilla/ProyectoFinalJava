@@ -1,10 +1,13 @@
 package com.retailjavafinal.controllers;
 
+import com.retailjavafinal.dao.CompraDao;
 import com.retailjavafinal.dao.ProductoDao;
-import com.retailjavafinal.models.CarritoDeCompra;
-import com.retailjavafinal.models.Producto;
-import com.retailjavafinal.models.Usuario;
+import com.retailjavafinal.dao.UsuarioDao;
+import com.retailjavafinal.models.*;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -90,7 +93,6 @@ public class GestionProductos {
             System.out.println("1. mostrar catalogo");
             System.out.println("2. Agregar producto al carrito de compras");
             System.out.println("3. Solicitar resumen del carrito de compras");
-            System.out.println("3. Elegir despacho a domicilio");
             System.out.println("4. realizar compra");
             System.out.println("5. Volver al menú principal");
 
@@ -110,6 +112,25 @@ public class GestionProductos {
                     break;
                 case 4:
                     //aqui llamamos a los daos con la dara recopilada
+                    CompraDao compraDao = new CompraDao();
+                    //generamos la fecha
+                    LocalDate localDate = LocalDate.now();
+                    Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+                    Compra compra = new Compra(date, carritoDeCompra.total);
+                    UsuarioDao usuarioDao = new UsuarioDao();
+                    usuarioDao.addCompraToUsuario(usuario.getId(),compra);
+
+                    for (DetalleCompra det: carritoDeCompra.compras
+                         ) {
+                        //compraDao.addDetalleCompra(compra1.getid(),det, .getId());
+                    }
+
+
+                    //SECCION COMENTADA PERO GUARDADA TEMPORALMENTE
+                    /*//Buscamos la ultima compra realiszada
+                    CompraDao ultCpa = new CompraDao();
+                    Compra uCompra = ultCpa.getultimaCompra(usuario.getId());*/
                     break;
                 case 5:
                     System.out.println("Volviendo al menú principal.");

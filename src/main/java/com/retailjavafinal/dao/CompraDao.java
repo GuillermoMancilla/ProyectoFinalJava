@@ -42,6 +42,19 @@ public class CompraDao {
         }
     }
 
+    public Compra getultimaCompra(long idUser) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query query = session.createQuery("FROM Compra WHERE usuario_id = :usuario_id order by id DESC", Compra.class);
+            query.setParameter("usuario_id", idUser);
+            query.setMaxResults(1);
+            Compra ultCpa = (Compra) query.uniqueResult();
+            return ultCpa;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
     public void addDetalleCompra(Long compraId, DetalleCompra detalleCompra, Long productoId) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
