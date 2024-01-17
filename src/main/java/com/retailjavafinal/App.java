@@ -96,32 +96,32 @@ public class App {
 
         while (true) {
             System.out.println("---- Menú Usuario Normal ----");
-            System.out.println("1. Crear pedido");
+            System.out.println("1. Seccion de compras");
             System.out.println("2. Ver historial de compras");
-            System.out.println("3. Solicitar resumen del carrito de compras");
-            System.out.println("4. Elegir despacho a domicilio");
-            System.out.println("5. Volver al menú principal");
+            //System.out.println("3. Solicitar resumen del carrito de compras");
+            System.out.println("3. Elegir despacho a domicilio");
+            System.out.println("4. Volver al menú principal");
 
             System.out.print("Seleccione una opción: ");
             int opcion = scanner.nextInt();
 
             switch (opcion) {
                 case 1:
-                    GestionProductos.mostrarCatalogo();
+                    GestionProductos.menuPedido(usuario);
                     break;
                 case 2:
                     //verHistorialCompras(usuario);
                     compraController.consultaTodasLasComprasDeusuario(usuario);
 
                     break;
-                case 3:
+                /*case 3:
                     //solicitarResumenCarrito(carrito);
-                    break;
-                case 4:
+                    break;*/
+                case 3:
                     //elegirDespachoDomicilio(scanner, carrito);
                     compraController.despacho();
                     break;
-                case 5:
+                case 4:
                     System.out.println("Volviendo al menú principal.");
                     return;
                 default:

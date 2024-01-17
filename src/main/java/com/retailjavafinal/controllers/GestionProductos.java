@@ -1,7 +1,9 @@
 package com.retailjavafinal.controllers;
 
 import com.retailjavafinal.dao.ProductoDao;
+import com.retailjavafinal.models.CarritoDeCompra;
 import com.retailjavafinal.models.Producto;
+import com.retailjavafinal.models.Usuario;
 
 import java.util.List;
 import java.util.Scanner;
@@ -80,13 +82,54 @@ public class GestionProductos {
 
     }
 
+    public static  void menuPedido(Usuario usuario){
+        Scanner scanner = new Scanner(System.in);
+        CarritoDeCompra carritoDeCompra = new CarritoDeCompra();
+        while (true) {
+            System.out.println("---- Menú de compras ----");
+            System.out.println("1. mostrar catalogo");
+            System.out.println("2. Agregar producto al carrito de compras");
+            System.out.println("3. Solicitar resumen del carrito de compras");
+            System.out.println("3. Elegir despacho a domicilio");
+            System.out.println("4. realizar compra");
+            System.out.println("5. Volver al menú principal");
+
+            System.out.print("Seleccione una opción: ");
+            int opcion = scanner.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    mostrarCatalogo();
+                    break;
+                case 2:
+                    //Aqui solicitaremos que cliente ingrese el codigo de producto visualizado en el catalogo
+                    System.out.println("por favor ingrese el codigo del producto a agregar:");
+                    break;
+                case 3:
+                    //aqui recorrer carrito de comrpas para mostrar a cliente su carrito
+                    break;
+                case 4:
+                    //aqui llamamos a los daos con la dara recopilada
+                    break;
+                case 5:
+                    System.out.println("Volviendo al menú principal.");
+                    return;
+                default:
+                    System.out.println("Opción no válida. Inténtelo de nuevo.");
+            }
+        }
+
+    }
+
     public static void mostrarCatalogo() {
         List<Producto> catalogo = obtenerCatalogo();
 
         System.out.println("Catalogo de productos:");
         for (int i = 0; i < catalogo.size(); i++) {
             Producto producto = catalogo.get(i);
-            System.out.println((i + 1) + ". " + producto.getNombre() + " - $" + producto.getPrecio());
+            //Se modifica para mostrar el codigo de producto
+            System.out.println((i + 1) + ". Codigo de producto: " + producto.getId()
+                    + " Producto: "+ producto.getNombre() + " - $" + producto.getPrecio());
         }
     }
 
