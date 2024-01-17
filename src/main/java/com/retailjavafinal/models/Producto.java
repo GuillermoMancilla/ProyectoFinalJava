@@ -1,9 +1,11 @@
 package com.retailjavafinal.models;
 
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.Entity;
+import org.hibernate.boot.archive.scan.spi.Scanner;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 public class Producto {
@@ -11,24 +13,40 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "tienda_id")
-    private DetalleCompra tienda;
+//    @ManyToOne
+//    @JoinColumn(name = "tienda_id")
+//    private DetalleCompra tienda;
 
-    private String nombre, descripcion;
+    @OneToMany(mappedBy="producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DetalleCompra> tienda;
+
+    private String nombre, descripcion, categoria;
     private long precio;
+
+    private int stock;
 
     // CONSTRUCTOR
 
     public Producto() {
     }
 
-    public Producto(DetalleCompra tienda, String nombre, long precio, String descripcion) {
-        this.tienda = tienda;
+    public Producto(String nombre, long precio, String descripcion, int stock, String categoria) {
+
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
+        this.stock = stock;
+        this.categoria = categoria;
     }
+
+//    public Producto(DetalleCompra tienda, String nombre, long precio, String descripcion, int stock, String categoria) {
+//        this.tienda = tienda;
+//        this.nombre = nombre;
+//        this.precio = precio;
+//        this.descripcion = descripcion;
+//        this.stock = stock;
+//        this.categoria = categoria;
+//    }
 
     // Getters y Setters
 
@@ -41,11 +59,11 @@ public class Producto {
     }
 
     public DetalleCompra getTienda() {
-        return tienda;
+        return (DetalleCompra) tienda;
     }
 
-    public void setTienda(DetalleCompra tienda) {
-        this.tienda = tienda;
+    public void setTienda(List<DetalleCompra> tienda) {
+        this.tienda =  tienda;
     }
 
     public String getNombre() {
@@ -56,7 +74,7 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public double getPrecio() {
+    public long getPrecio() {
         return precio;
     }
 
@@ -70,6 +88,27 @@ public class Producto {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public void agregarCompra(DetalleCompra detalleCompra) {
+        tienda.add(detalleCompra);
+        detalleCompra.setProducto(this);
     }
 
 }

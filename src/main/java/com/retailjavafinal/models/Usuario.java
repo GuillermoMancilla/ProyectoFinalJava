@@ -1,9 +1,8 @@
 package com.retailjavafinal.models;
 
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.Entity;
-
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Usuario {
@@ -11,18 +10,25 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nombre, apellido, correoElectronico, direccion, telefono, tipo_usuario;
+    @OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Compra> compra = new ArrayList<>();
+
+
+    private String nombre, apellido, correoElectronico, direccion, telefono, tipo_usuario, userName, contrasenia;
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, String correoElectronico, String direccion, String telefono, String tipo_usuario) {
+    public Usuario(String nombre, String apellido, String correoElectronico, String direccion, String telefono, String tipo_usuario
+    , String nombreusuario, String contrasenia) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.correoElectronico = correoElectronico;
         this.direccion = direccion;
         this.telefono = telefono;
         this.tipo_usuario = tipo_usuario;
+        this.userName = nombreusuario;
+        this.contrasenia = contrasenia;
     }
 
     public Long getId() {
@@ -79,6 +85,35 @@ public class Usuario {
 
     public void setTipo_usuario(String tipo_usuario) {
         this.tipo_usuario = tipo_usuario;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public List<Compra> getCompra() {
+        return compra;
+    }
+
+    public void setCompra(List<Compra> compra) {
+        this.compra = compra;
+    }
+
+    public void agregarCompra(Compra compraUsusario) {
+        compra.add(compraUsusario);
+        compraUsusario.setUsuario(this);
     }
 }
 

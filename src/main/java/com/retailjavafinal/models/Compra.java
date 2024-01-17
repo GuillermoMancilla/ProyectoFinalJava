@@ -14,10 +14,20 @@ public class Compra {
     private long total;
 
     @ManyToOne
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compra")
+    @OneToMany(mappedBy = "compra",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetalleCompra> listaDetalleCompra;
+
+    public Compra() {
+
+    }
+
+    public Compra(Date fecha, long total) {
+        this.fecha = fecha;
+        this.total = total;
+    }
 
     public Long getid() {
         return id;
@@ -57,5 +67,10 @@ public class Compra {
 
     public void setListaDetalleCompra(List<DetalleCompra> listaDetalleCompra) {
         this.listaDetalleCompra = listaDetalleCompra;
+    }
+
+    public void agregarCompra(DetalleCompra detalleCompra) {
+        listaDetalleCompra.add(detalleCompra);
+        detalleCompra.setCompra(this);
     }
 }
