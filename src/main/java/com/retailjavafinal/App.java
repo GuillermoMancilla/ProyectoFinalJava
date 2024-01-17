@@ -107,7 +107,7 @@ public class App {
 
             switch (opcion) {
                 case 1:
-                    //crearPedido(scanner, carrito, usuario);
+                    GestionProductos.mostrarCatalogo();
                     break;
                 case 2:
                     //verHistorialCompras(usuario);
@@ -119,6 +119,7 @@ public class App {
                     break;
                 case 4:
                     //elegirDespachoDomicilio(scanner, carrito);
+                    compraController.despacho();
                     break;
                 case 5:
                     System.out.println("Volviendo al menú principal.");

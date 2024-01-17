@@ -76,5 +76,26 @@ public class GestionProductos {
             System.out.println("El producto encontrado es: " + productocategoria.getNombre()
                     + " con descripcion: " + productocategoria.getDescripcion() + "\n");
         }
+
+
+    }
+
+    public static void mostrarCatalogo() {
+        List<Producto> catalogo = obtenerCatalogo();
+
+        System.out.println("Catalogo de productos:");
+        for (int i = 0; i < catalogo.size(); i++) {
+            Producto producto = catalogo.get(i);
+            System.out.println((i + 1) + ". " + producto.getNombre() + " - $" + producto.getPrecio());
+        }
+    }
+
+    public static List<Producto> obtenerCatalogo() {
+        return cargarProductos();
+    }
+
+    public static List<Producto> cargarProductos() {
+        ProductoDao productoDao = new ProductoDao();
+        return productoDao.findAll();
     }
 }

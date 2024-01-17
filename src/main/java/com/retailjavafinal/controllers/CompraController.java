@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 public class CompraController {
 
@@ -29,5 +30,22 @@ public class CompraController {
         }
     }
 
+    public void despacho() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Indique el tipo de envio:\n1. Despacho a domicilio\n2. Retiro en tienda");
+        int seleccion = scanner.nextInt();
+
+        switch (seleccion) {
+            case 1:
+                System.out.println("El envio sera a domicilio dentro de 5 días habiles");
+                break;
+            case 2:
+                System.out.println("El retiro en tienda sera dentro de los 4 días habiles");
+                break;
+            default:
+                System.out.println("Opcion no valida. Intentalo de nuevo.");
+        }
+    }
 
 }
